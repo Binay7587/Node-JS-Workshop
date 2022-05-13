@@ -1,0 +1,14 @@
+{
+  "name": "day2",
+  "version": "1.0.0",
+  "description": "* Node Js Installation & Exploring NVM (Node Version Manager)\r * Understanding JS Package Managers (npm, yarn,pnpm). \r * Understanding REPL.\r * Creating First Node Project.\r * Playout with Node js Basics & Exploring Nodejs inbuilt globals.",
+  "main": "index.js",
+  "scripts": {
+    "greet": "Hello World",
+    "start": "node ."
+  },
+  "keywords": [],
+  "author": "Binaya Karki",
+  "license": "ISC",
+  "type": "module"
+}
