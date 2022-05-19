@@ -13,7 +13,7 @@
 #### [Day 2 - Node js Installation & Exploring Basics of Node js](./day2)
 #### [Day 3 - Exploring Nodejs Inbuilt Modules && Creating HTTP Server in Node js](./day3)
 #### [Day 4 - Understanding Network Fundamentals, Routings in HTTP Server & Using Nodemon](./day4)
-#### [Day 5 - Exploring express Framework and Understanding the Concept of AP](./day5)
+#### [Day 5 - Exploring express Framework and Understanding the Concept of API](./day5)
 <!-- #### [Day 6 - State management with Redux](./day6)
 #### [Day 7 - React router, custom hooks, styling app with CSS and webpack](./day7)
 #### [Day 8 - GraphQL](./day8)
