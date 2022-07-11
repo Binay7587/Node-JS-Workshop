@@ -17,6 +17,7 @@
 #### [Day 6 - API Testing using Thunder Client and Exploring the Concept of Middlewares](./day6)
 #### [Day 7 - Concept of Database, SQL, NoSQL, DBMS, and ORM](./day7)
 #### [Day 8 - Working with SQL Database in Nodejs](./day8)
+#### [Day 9 - Understanding .env file & Exploring Sequelize ORM in Nodejs](./day9)
 
 <!-- PREREQUISITE -->
 ## Prerequisite before learning Nodejs:
