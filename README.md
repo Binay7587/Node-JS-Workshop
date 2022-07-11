@@ -14,14 +14,9 @@
 #### [Day 3 - Exploring Nodejs Inbuilt Modules && Creating HTTP Server in Node js](./day3)
 #### [Day 4 - Understanding Network Fundamentals, Routings in HTTP Server & Using Nodemon](./day4)
 #### [Day 5 - Exploring express Framework and Understanding the Concept of API](./day5)
-<!-- #### [Day 6 - State management with Redux](./day6)
-#### [Day 7 - React router, custom hooks, styling app with CSS and webpack](./day7)
-#### [Day 8 - GraphQL](./day8)
-#### [Day 9 - Typescript](./day9)
-#### [Day 10 - React Native](./day10)
-#### [Day 11 - CI/CD](./day11)
-#### [Day 12 - Containers](./day12)
-#### [Day 13 - Using relational databases](./day13) -->
+#### [Day 6 - API Testing using Thunder Client and Exploring the Concept of Middlewares](./day6)
+#### [Day 7 - Concept of Database, SQL, NoSQL, DBMS, and ORM](./day7)
+#### [Day 8 - Working with SQL Database in Nodejs](./day8)
 
 <!-- PREREQUISITE -->
 ## Prerequisite before learning Nodejs:
