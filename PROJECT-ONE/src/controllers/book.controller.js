@@ -1,3 +1,4 @@
+import { Op } from "sequelize";
 import bookModel from "../models/book.model.js";
 
 export default class BookController {
@@ -27,6 +28,36 @@ export default class BookController {
             res.json(data)
         }else{
             res.json({ success: false, message: "Error during creating book" });
+        }
+    }
+
+    /**
+     * Search a book.
+     * @param {*} req 
+     * @param {*} res 
+     */
+    async search(req, res) {
+        const { q } = req.query;
+        if(q){
+            const data = await bookModel.findAll({
+                where: {
+                    [Op.or]: {
+                        name: {
+                            [Op.like]: `%${q}%`
+                        },
+                        author: {
+                            [Op.like]: `%${q}%`
+                        }
+                    },
+                },
+            });
+            if(data[0]){
+                res.json(data)
+            }else{
+                res.json({ success: false, message: "There is no any book." });
+            }
+        }else{
+            res.json({ success:false, message: "Please enter a search query." });
         }
     }
 

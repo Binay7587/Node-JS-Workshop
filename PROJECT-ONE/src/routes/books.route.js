@@ -26,6 +26,9 @@ router.post("/", upload.single("image"), (req, res) => {
     bookController.store(req, res, imagename);
 });
 
+// Searchs a book
+router.get("/search", bookController.search);
+
 // Create view for a book
 // router.get("/create", bookController.create);
 
