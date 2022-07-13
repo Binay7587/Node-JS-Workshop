@@ -7,7 +7,12 @@ export default class BookController {
      * Display a listing of the books.
      */
     async index(req, res) {
-        const data = await bookModel.findAll();
+        let { limit } = req.query;
+        if(!limit) limit = 20;
+
+        const data = await bookModel.findAll({
+            limit
+        });
         if(data){
             res.json(data)
         }else{
