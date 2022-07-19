@@ -1,5 +1,7 @@
 import { Op } from "sequelize";
 import bookModel from "../models/book.model.js";
+import textConstant from "../constants/text.constant.js";
+import urlConstant from "../constants/url.constant.js";
 
 export default class BookController {
 
@@ -10,16 +12,22 @@ export default class BookController {
         let { limit } = req.query;
         if(!limit) limit = 20;
 
-        const data = await bookModel.findAll({
-            limit: parseInt(limit),
-        });
-        if(data){
-            for(let d of data){
-                d.dataValues.image = "http://localhost:8000/uploads/books/" + d.dataValues.image
+        try{
+            const data = await bookModel.findAll({
+                limit: parseInt(limit),
+                raw: true
+            });
+            if(data){
+                for(let d of data){
+                    d.image = d.image ? urlConstant.BOOK_IMG_PATH_URL + d.image : urlConstant.ASSETS_PATH_URL + "/img/no_image.png";
+                }
+    
+                res.json(data)
+            }else{
+                res.json({ success: false, message: textConstant.NO_BOOKS });
             }
-            res.json(data)
-        }else{
-            res.json({ success: false, message: "There is no any book." });
+        }catch(err){
+            res.json({ success: false, message: err });
         }
     }
 
@@ -30,12 +38,16 @@ export default class BookController {
      * @param {*} imagename 
      */
     async store(req, res, imagename) {
-        const data = await bookModel.create({ ...req.body, image: imagename });
-        console.log(data);
-        if(data){
-            res.json(data)
-        }else{
-            res.json({ success: false, message: "Error during creating book" });
+        try{
+            const data = await bookModel.create({ ...req.body, image: imagename });
+            // console.log(data);
+            if(data){
+                res.json(data)
+            }else{
+                res.json({ success: false, message: textConstant.ERROR_DURING_CREATING_BOOK });
+            }
+        }catch(err){
+            res.json({ success: false, message: err });
         }
     }
 
@@ -46,26 +58,30 @@ export default class BookController {
      */
     async search(req, res) {
         const { q } = req.query;
-        if(q){
-            const data = await bookModel.findAll({
-                where: {
-                    [Op.or]: {
-                        name: {
-                            [Op.like]: `%${q}%`
+        try{
+            if(q){
+                const data = await bookModel.findAll({
+                    where: {
+                        [Op.or]: {
+                            name: {
+                                [Op.like]: `%${q}%`
+                            },
+                            author: {
+                                [Op.like]: `%${q}%`
+                            }
                         },
-                        author: {
-                            [Op.like]: `%${q}%`
-                        }
                     },
-                },
-            });
-            if(data[0]){
-                res.json(data)
+                });
+                if(data[0]){
+                    res.json(data)
+                }else{
+                    res.json({ success: false, message: textConstant.NO_BOOKS });
+                }
             }else{
-                res.json({ success: false, message: "There is no any book." });
+                res.json({ success:false, message: textConstant.PLEASE_ENTER_SEARCH_QUERY });
             }
-        }else{
-            res.json({ success:false, message: "Please enter a search query." });
+        }catch(err){
+            res.json({ success: false, message: err });
         }
     }
 
@@ -77,11 +93,15 @@ export default class BookController {
      async show(req, res) {
         const { id } = req.params;
 
-        const data = await bookModel.findByPk(id);
-        if(data){
-            res.json(data)
-        }else{
-            res.json({ success: false, message: "There is no such book." });
+        try{
+            const data = await bookModel.findByPk(id);
+            if(data){
+                res.json(data)
+            }else{
+                res.json({ success: false, message: textConstant.NO_BOOKS });
+            }
+        }catch(err){
+            res.json({ success: false, message: err });
         }
     }
 
@@ -92,14 +112,18 @@ export default class BookController {
      */
      async update(req, res) {
         const { id } = req.params;
-        const book = await bookModel.findByPk(id);
+        try{
+            const book = await bookModel.findByPk(id);
         
-        if(book){
-            const data = await book.update(req.body);
-            // using ternary operators to check if the data is updated or not
-            data ? res.json(data): res.json({ success: false, message: "Error during updating book" });
-        }else{
-            res.json({ success: false, message: "There is no such book." });
+            if(book){
+                const data = await book.update(req.body);
+                // using ternary operators to check if the data is updated or not
+                data ? res.json(data): res.json({ success: false, message: textConstant.ERROR_DURING_UPDATING_BOOK });
+            }else{
+                res.json({ success: false, message: textConstant.NO_BOOKS });
+            }
+        }catch(err){
+            res.json({ success: false, message: err });
         }
     }
     
@@ -110,14 +134,18 @@ export default class BookController {
      */
     async destroy(req, res) {
         const { id } = req.params;
-        const book = await bookModel.findByPk(id);
+        try{
+            const book = await bookModel.findByPk(id);
         
-        if(book){
-            const data = await book.destroy();
-            // using ternary operators to check if the data is deleted or not
-            data ? res.json({ success: true, message: "Book deleted successfully." }) : res.json({ success: false, message: "Error during deleting book" });
-        }else{
-            res.json({ success: false, message: "There is no such book." });
+            if(book){
+                const data = await book.destroy();
+                // using ternary operators to check if the data is deleted or not
+                data ? res.json({ success: true, message: textConstant.BOOK_DELETED_SUCCESSFULLY }) : res.json({ success: false, message: textConstant.ERROR_DURING_DELETING_BOOK });
+            }else{
+                res.json({ success: false, message: textConstant.NO_BOOKS });
+            }
+        }catch(err){
+            res.json({ success: false, message: err });
         }
     }
 }

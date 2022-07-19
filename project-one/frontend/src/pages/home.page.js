@@ -12,7 +12,7 @@ const HomePage = () => {
     }
 
     getBooks();
-  });
+  }, []);
 
   return (
     <div style={{ display:"flex" }}>
