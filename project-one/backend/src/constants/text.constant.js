@@ -9,4 +9,6 @@ export default{
     ERROR_DURING_DELETING_BOOK: "Error during deleting book.",
     PLEASE_ENTER_SEARCH_QUERY: "Please enter a search query.",
 
+    ERROR_WHILE_QUERING_DATABASE: "Error while quering in database.",
+
 };

@@ -15,9 +15,9 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div style={{ display:"flex" }}>
+    <div style={{ display:"flex", flexWrap:"wrap", alignItems:'center', justifyContent:'center' }}>
       {bookList.map((book, index) =>{
-        return <div key={index} style={{ display: "flex", flexDirection: "column", padding: "20px", boxShadow: "0px 0px 5px #ccc", marginLeft: "20px" }}>
+        return <div key={index} style={{ display: "flex", flexDirection: "column", padding: "20px", boxShadow: "0px 0px 5px #ccc", marginLeft: "20px", marginTop:'20px' }}>
           <img src={book.image} alt="book" style={{height: "250px", width: "250px", objectFit:"content"}} />
           <h3>{book.name}</h3>
           <p>{book.description}</p>

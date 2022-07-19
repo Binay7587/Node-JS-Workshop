@@ -47,7 +47,7 @@ export default class BookController {
                 res.json({ success: false, message: textConstant.ERROR_DURING_CREATING_BOOK });
             }
         }catch(err){
-            res.json({ success: false, message: err });
+            return res.json({ success: false, message: textConstant.ERROR_WHILE_QUERING_DATABASE });
         }
     }
 
