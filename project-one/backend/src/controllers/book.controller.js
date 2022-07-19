@@ -11,9 +11,12 @@ export default class BookController {
         if(!limit) limit = 20;
 
         const data = await bookModel.findAll({
-            limit
+            limit: parseInt(limit),
         });
         if(data){
+            for(let d of data){
+                d.dataValues.image = "http://localhost:8000/uploads/books/" + d.dataValues.image
+            }
             res.json(data)
         }else{
             res.json({ success: false, message: "There is no any book." });
