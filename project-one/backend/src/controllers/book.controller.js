@@ -71,8 +71,12 @@ export default class BookController {
                             }
                         },
                     },
+                    raw: true,
                 });
                 if(data[0]){
+                    for(let d of data){
+                        d.image = d.image ? urlConstant.BOOK_IMG_PATH_URL + d.image : urlConstant.ASSETS_PATH_URL + "/img/no_image.png";
+                    }
                     res.json(data)
                 }else{
                     res.json({ success: false, message: textConstant.NO_BOOKS });
