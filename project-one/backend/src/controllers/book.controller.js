@@ -10,7 +10,7 @@ export default class BookController {
      */
     async index(req, res) {
         let { limit } = req.query;
-        if(!limit) limit = 20;
+        if(!limit) limit = 30;
 
         try{
             const data = await bookModel.findAll({
