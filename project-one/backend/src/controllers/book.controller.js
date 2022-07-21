@@ -10,7 +10,7 @@ export default class BookController {
      */
     async index(req, res) {
         let { limit } = req.query;
-        if(!limit) limit = 30;
+        if(!limit) limit = 100;
 
         try{
             const data = await bookModel.findAll({
@@ -35,10 +35,10 @@ export default class BookController {
      * Store a book in the database.
      * @param {*} req 
      * @param {*} res 
-     * @param {*} imagename 
      */
-    async store(req, res, imagename) {
+    async store(req, res) {
         try{
+            const imagename = req.file ? req.file.filename : null;
             const data = await bookModel.create({ ...req.body, image: imagename });
             // console.log(data);
             if(data){
